@@ -38,7 +38,7 @@ const posts = [
         media: "https://unsplash.it/600/400?image=24",
         author: {
             name: "Luca Formicola",
-            image: null
+            image: ''
         },
         likes: 56,
         created: "2021-04-03"
@@ -69,7 +69,7 @@ posts.forEach((item) => {
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${item.author.image}" alt="Phil Mangione">                    
+                    <img class="profile-pic" src="${item.author.image}" alt="${item.author.name}">                    
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${item.author.name}</div>
@@ -98,5 +98,24 @@ posts.forEach((item) => {
     
     // ho aggiunto al container nell'html la mia variabile con il contenuto
     document.querySelector('#container').innerHTML += post;
+
+    // like button 
+    document.querySelector('.like-button').addEventListener('click', function () {
+        let button = document.querySelector('.like-button');
+
+        if (button.classList.contains('.like-button__label')) {
+            
+            button.classList.remove('.like-button__label');
+            button.classList.add('.like-button--liked');
+        } else {
+            button.classList.remove('.like-button--liked');
+            button.classList.add('.like-button__label');
+        }
+    })
+
+    // bonus 4
+    if(item.author.image === '') {
+        item.author.image = '17004.png';
+    }
 
 });
