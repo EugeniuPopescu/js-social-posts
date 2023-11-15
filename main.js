@@ -38,7 +38,7 @@ const posts = [
         media: "https://unsplash.it/600/400?image=24",
         author: {
             name: "Luca Formicola",
-            image: ''
+            image: null
         },
         likes: 56,
         created: "2021-04-03"
@@ -68,7 +68,7 @@ posts.forEach((item) => {
 
 });
 
-// like buttons
+// like buttons & counter
 let likeButtons = document.querySelectorAll('.like-button');
 let likeCounters = document.querySelectorAll('.js-likes-counter');
 
@@ -115,16 +115,17 @@ function renderPost(item) {
     let { id, content, media, author, likes, created } = item;
     let { name, image } = author;
 
+
     let result = `
     <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${image}" alt="${name}">                    
+                    ${ getImage(image, name) }         
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${name}</div>
-                    <div class="post-meta__time">${created}</div>
+                    <div class="post-meta__time">${ getDate(created) }</div>
                 </div>                    
             </div>
         </div>
@@ -148,4 +149,29 @@ function renderPost(item) {
     </div>`;
 
     return result;
+}
+
+function getImage(image, name) {
+    result = '';
+
+    if (image == null) {
+        let nomeSeparato = name.split('');
+        let fName = nomeSeparato[0];
+        let sName = nomeSeparato[1];
+        let iniziali = fName[0] + '-' + sName[0];
+
+        result = `<div class="profile-pic-default"><span>${iniziali}</span></div>`;
+    } else {
+        result = `<img class="profile-pic" src="${image}" alt="${name}">`;
+    }
+
+    return result;
+} 
+
+function getDate(date) {
+    // modifica data
+    // split -> mi prende la data e mi crea l'array 
+    // reverse -> mi inverte i valori al contrario
+    // join -> mi unisce i valori nell'array e li separa con quello che li metto nelle tonde
+    return date.split('-').reverse().join('-');
 }
