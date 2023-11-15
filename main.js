@@ -68,6 +68,46 @@ posts.forEach((item) => {
 
 });
 
+// like buttons
+let likeButtons = document.querySelectorAll('.like-button');
+let likeCounters = document.querySelectorAll('.js-likes-counter');
+
+for (let i = 0; i < likeButtons.length; i++) {
+    const btn = likeButtons[i];
+    const counter = likeCounters[i];
+    
+    btn.addEventListener('click', function(e) {
+        
+        e.preventDefault();
+
+        
+        const likeNumber = parseInt(counter.innerText);
+        
+
+        // SE il btn contiene la classe
+        if (btn.classList.contains('like-button--liked')) {
+            // toglie la classe mi-piace e decrementa il contatore
+            btn.classList.remove('like-button--liked');
+            counter.innerText = likeNumber - 1;
+        } else {
+            // aggiunge la classe mi-piace e incrementa il contatore
+            btn.classList.add('like-button--liked');
+            counter.innerText = likeNumber + 1;
+        }
+    });
+}
+
+// ciclo i bottoni
+// likeButtons.forEach((btn, i) => {
+    
+//     btn.addEventListener('click', function(e) {
+        
+//         e.preventDefault();
+
+//         btn.classList.toggle('like-button--liked');
+//     });
+// });
+
 // funziona che renderizza il mio post
 // item è la variabile che gli do io (puo essere diversa)
 function renderPost(item) {
