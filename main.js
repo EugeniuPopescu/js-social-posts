@@ -151,6 +151,7 @@ function renderPost(item) {
     return result;
 }
 
+// name initials
 function getImage(image, name) {
     result = '';
 
